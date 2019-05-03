@@ -1,0 +1,50 @@
+function SPLITNAME (nomeSobrenome) {
+//Separando o nome e o(s) sobrenomes
+var array1 = nomeSobrenome.split(" ");
+return array1;
+}
+
+function EMAILS (nomeSobrenome, site) {
+arrayNomes = [];
+arrayNomes = SPLITNAME(nomeSobrenome);
+//Tornando as iniciais em minúsculo
+for(var i = 0; i < arrayNomes.length; i++){
+arrayNomes[i] = arrayNomes[i].toLowerCase();
+}
+
+//Tirando os acentos
+for(var i = 0; i < arrayNomes.length; i++){
+arrayNomes[i] = removeAcento(arrayNomes[i]);
+}
+
+//criando os E-mails usando o nome e o último sobrenome
+var emailNome = arrayNomes[0]+"@"+site;
+var emailSobrenome = arrayNomes[arrayNomes.length-1]+"@"+site;
+var emailNomeSobrenome = arrayNomes[0] + arrayNomes[arrayNomes.length-1]+"@"+site;
+//pegando a primeira letra do nome e do sobrenome
+var array = arrayNomes[0].split("");
+var priNome = array[0];
+array = arrayNomes[arrayNomes.length-1].split("");
+var priSobrenome = array[0];
+var emailPriNomeSobrenome = priNome+arrayNomes[arrayNomes.length-1]+"@"+site;
+var emailNomePriSobrenome = arrayNomes[0]+priSobrenome+"@"+site;
+var emailPriNomePontoSobrenome = priNome+"."+arrayNomes[arrayNomes.length-1]+"@"+site;
+var emailNomePontoPriSobrenome = arrayNomes[0]+"."+priSobrenome+"@"+site;
+var emailNomePontoSobrenome = arrayNomes[0]+"."+arrayNomes[arrayNomes.length-1]+"@"+site;
+arrayEmails = [[emailNome, emailSobrenome, emailNomeSobrenome, emailPriNomeSobrenome,
+emailNomePriSobrenome, emailPriNomePontoSobrenome, emailNomePontoPriSobrenome,
+emailNomePontoSobrenome]];
+return arrayEmails;
+}
+
+function removeAcento (text)
+{
+text = text.toLowerCase();
+text = text.replace(new RegExp('[ÁÀÂÃ]','gi'), 'a');
+text = text.replace(new RegExp('[ÉÈÊ]','gi'), 'e');
+text = text.replace(new RegExp('[ÍÌÎ]','gi'), 'i');
+text = text.replace(new RegExp('[ÓÒÔÕ]','gi'), 'o');
+text = text.replace(new RegExp('[ÚÙÛ]','gi'), 'u');
+text = text.replace(new RegExp('[Ç]','gi'), 'c');
+return text;
+}
